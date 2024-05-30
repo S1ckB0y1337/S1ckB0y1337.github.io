@@ -1,0 +1,48 @@
+name: github pages
+
+on:
+  push:
+    branches:
+      - main  # Set a branch to deploy
+  pull_request:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive  # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0         # Fetch all history for .GitInfo and .Lastmod
+
+      - name: Fix timezone
+        uses: szenius/set-timezone@v1.0
+        with:
+          timezoneLinux: "Europe/Amsterdam"
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      # Ugly hot-patch to enforce dark theme as standard
+      # See: https://github.com/rhazdon/hugo-theme-hello-friend-ng/issues/353
+      - name: Modify theme JS to force dark theme by default
+        run: |
+          sed -i 's/window.matchMedia("(prefers-color-scheme: dark)").matches/true/' themes/hello-friend-ng/assets/js/main.js
+
+      # Another ugly hot-patch to fix faulty 'aria-role' attribute
+      - name: Modify index layout to fix faulty 'aria-role' attribute
+        run: |
+          sed -i 's/aria-role/role/' themes/hello-friend-ng/layouts/index.html
+
+      - name: Build
+        run: hugo --minify
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
