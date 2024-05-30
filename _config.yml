@@ -1,18 +1,7 @@
-title: 'b2a3e8.github.io'
-description: "A jekyll theme inspired by linux consoles for hackers, developers and script kiddies."
-baseurl: "/jekyll-theme-console-demo-dark"
-url: "https://b2a3e8.github.io"
+title: [Welcome To My Blog]
+description: [BLEH]
 
-header_pages:
-  - index.md
-  - peter.md
-  - about.md
-  - contact.md
 
-style: dark
-
-footer: 'follow us on <a href="https://twitter.com/">twitter</a>'
-
-# Build settings
-markdown: kramdown
-remote_theme: b2a3e8/jekyll-theme-console
+remote_theme: pages-themes/hacker@v0.2.0
+plugins:
+- jekyll-remote-theme # add this line to the plugins list if you already have one
