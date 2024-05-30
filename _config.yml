@@ -1,0 +1,74 @@
+# Site settings
+title: "@S1ckB0y's - Cyber Cave"
+description: "Security & Research Blog"
+baseurl: "" 
+url: ""
+
+# User settings
+username: S1ckB0y
+user_title: S1ckB0y
+twitter_username: S1ckB0y1337
+github_username:  S1ckB0y1337
+linkedin_public_url: nikos-katsiopis
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: /:title/
+
+# html minify
+compress_html:
+  clippings: all
+  comments: all
+  endings: []
+  profile: false
+
+# Links to include in menu navigation
+links:
+  section_1:
+    - title: home
+      url: /
+      key_trigger: 1
+    - title: about me
+      url: /about
+      key_trigger: 2
+    - title: my posts
+      url: /posts
+      key_trigger: 3
+    - title: tags
+      url: /tags
+      key_trigger: 4
+  section_2:
+    - title: accredible
+      new_tab: true
+      url: https://www.credential.net/profile/buftas/wallet
+      key_trigger: a
+    - title: github
+      url: https://www.github.com/s1ckb0y1337
+      new_tab: true
+      key_trigger: g
+  section_3:
+    - title: linkedin
+      new_tab: true
+      url: https://www.linkedin.com/in/nikos-katsiopis/
+      key_trigger: l
+    - title: my tools
+      url: /my-tools
+      key_trigger: m
+    - title: search
+      url: ""
+      key_trigger: s #WARNING: search only works with "s"
+    - title: twitter
+      new_tab: true
+      url: https://www.twitter.com/s1ckb0y1337
+      key_trigger: t
+    
+    
+# Projects in header index
+projects:
+    - name: 
+      url: 
+    
+# exclude node related stuff
+exclude: ['package.json', 'src', 'node_modules']
+

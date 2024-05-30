@@ -1,0 +1,18 @@
+---
+layout: minimal
+title: "@S1ckB0y1337 - My Tools"
+permalink: /my-tools/
+description: "My custom tools"
+---
+
+<img itemprop="image" class="img-rounded about_perfil" src="/assets/img/index-logo/fox-logo-200x200.png" alt="nickvourd's profile logo"> 
+
+<h2>My Tools</h2>
+
+<div class="aboutme">
+	<ul class="recent">
+		{% for project in site.projects %}
+	    	<li><a href="{{ project.url}}"><h3 class="project-name" itemprop="name">{{ project.name }}</h3></a></li>
+	    {% endfor %}
+	</ul>
+</div>

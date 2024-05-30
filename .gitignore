@@ -1,2 +1,4 @@
-.hugo_build.lock
-public/
+_site
+.sass-cache
+node_modules
+_drafts
