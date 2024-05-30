@@ -1,116 +1,213 @@
-# The Hacker theme
+# Hello Friend NG
 
-[![.github/workflows/ci.yaml](https://github.com/pages-themes/hacker/actions/workflows/ci.yaml/badge.svg)](https://github.com/pages-themes/hacker/actions/workflows/ci.yaml) [![Gem Version](https://badge.fury.io/rb/jekyll-theme-hacker.svg)](https://badge.fury.io/rb/jekyll-theme-hacker)
+![Hello Friend NG](https://dsh.re/d914c)
 
-*Hacker is a Jekyll theme for GitHub Pages. You can [preview the theme to see what it looks like](http://pages-themes.github.io/hacker), or even [use it today](#usage).*
+## General informations
 
-![Thumbnail of Hacker](thumbnail.png)
+This theme was highly inspired by the [hello-friend](https://github.com/panr/hugo-theme-hello-friend) and [hermit](https://github.com/Track3/hermit). A lot of kudos for their great work.
 
-## Usage
+---
 
-To use the Hacker theme:
+## Table of Contents
 
-1. Add the following to your site's `_config.yml`:
+- [Features](#features)
+- [How to start](#how-to-start)
+- [How to configure](#how-to-configure)
+- [More](#more-things)
+  - [Built in shortcodes](#built-in-shortcodes)
+    - [image](#image)
+  - [Code highlighting](#code-highlighting)
+  - [Favicon](#favicon)
+  - [Audio Support](#audio-support)
+- [Social Icons](#social-icons)
+- [Known issues](#known-issues)
+- [How to edit the theme](#how-to-edit-the-theme)
+- [Changelog](CHANGELOG.md)
+- [Sponsoring](#sponsoring)
+- [Licence](#licence)
 
-    ```yml
-    remote_theme: pages-themes/hacker@v0.2.0
-    plugins:
-    - jekyll-remote-theme # add this line to the plugins list if you already have one
-    ```
+---
 
-2. Optionally, if you'd like to preview your site on your computer, add the following to your site's `Gemfile`:
+## Features
 
-    ```ruby
-    gem "github-pages", group: :jekyll_plugins
-    ```
+- Theming: **dark/light mode**, depending on your system preferences or the users choice
+- Great reading experience thanks to [**Inter font**](https://rsms.me/inter/), made by [Rasmus Andersson](https://rsms.me/about/)
+- Nice code highlighting thanks to [**PrismJS**](https://prismjs.com)
+- An easy way to modify the theme with Hugo tooling
+- Fully responsive
+- Support for audio in posts (thanks to [@talbotp](https://github.com/talbotp))
+- Builtin (enableable/disableable) multilanguage menu
+- Support for social icons
+- Support for sharing buttons
+- Support for [Commento](https://commento.io)
+- Support for [Plausible](https://plausible.io) (thanks to [@Joffcom](https://github.com/Joffcom))
+- Support for [utterances](https://utteranc.es/) comment system
 
-## Customizing
+## How to start
 
-### Configuration variables
+You can download the theme manually by going to [https://github.com/rhazdon/hugo-theme-hello-friend-ng.git](https://github.com/rhazdon/hugo-theme-hello-friend-ng.git) and pasting it to `themes/hello-friend-ng` in your root directory.
 
-Hacker will respect the following variables, if set in your site's `_config.yml`:
+You can also clone it directly to your Hugo folder:
 
-```yml
-title: [The title of your site]
-description: [A short description of your site's purpose]
+``` bash
+$ git clone https://github.com/rhazdon/hugo-theme-hello-friend-ng.git themes/hello-friend-ng
 ```
 
-Additionally, you may choose to set the following optional variables:
+If you don't want to make any radical changes, it's the best option, because you can get new updates when they are available. To do so, include it as a git submodule:
 
-```yml
-show_downloads: ["true" or "false" (unquoted) to indicate whether to provide a download URL]
-google_analytics: [Your Google Analytics tracking ID]
+``` bash
+$ git submodule add https://github.com/rhazdon/hugo-theme-hello-friend-ng.git themes/hello-friend-ng
 ```
 
-### Stylesheet
+## How to configure
 
-If you'd like to add your own custom styles:
+The theme doesn't require any advanced configuration. Just copy the following config file.
+To see all possible configurations, [check the docs](docs/config.md).
+Note: There are more options to configure. Take a look into the `config.toml` in `exampleSite`.
 
-1. Create a file called `/assets/css/style.scss` in your site
-2. Add the following content to the top of the file, exactly as shown:
-    ```scss
-    ---
-    ---
+``` toml
+baseurl      = "localhost"
+title        = "My Blog"
+languageCode = "en-us"
+theme        = "hello-friend-ng"
+paginate     = 10
 
-    @import "{{ site.theme }}";
-    ```
-3. Add any custom CSS (or Sass, including imports) you'd like immediately after the `@import` line
+[params]
+  dateform        = "Jan 2, 2006"
+  dateformShort   = "Jan 2"
+  dateformNum     = "2006-01-02"
+  dateformNumTime = "2006-01-02 15:04"
 
-*Note: If you'd like to change the theme's Sass variables, you must set new values before the `@import` line in your stylesheet.*
+  # Subtitle for home
+  homeSubtitle = "A simple and beautiful blog"
 
-### Layouts
+  # Set disableReadOtherPosts to true in order to hide the links to other posts.
+  disableReadOtherPosts = false
 
-If you'd like to change the theme's HTML layout:
+  # Enable sharing buttons, if you like
+  enableSharingButtons = true
+  
+  # Show a global language switcher in the navigation bar
+  enableGlobalLanguageMenu = true
 
-1. For some changes such as a custom `favicon`, you can add custom files in your local `_includes` folder. The files [provided with the theme](https://github.com/pages-themes/hacker/tree/master/_includes) provide a starting point and are included by the [original layout template](https://github.com/pages-themes/hacker/blob/master/_layouts/default.html).
-2. For more extensive changes, [copy the original template](https://github.com/pages-themes/hacker/blob/master/_layouts/default.html) from the theme's repository<br />(*Pro-tip: click "raw" to make copying easier*)
-3. Create a file called `/_layouts/default.html` in your site
-4. Paste the default layout content copied in the first step
-5. Customize the layout as you'd like
+  # Metadata mostly used in document's head
+  description = "My new homepage or blog"
+  keywords = "homepage, blog"
+  images = [""]
 
-### Customizing Google Analytics code
+[taxonomies]
+    category = "blog"
+    tag      = "tags"
+    series   = "series"
 
-Google has released several iterations to their Google Analytics code over the years since this theme was first created. If you would like to take advantage of the latest code, paste it into `_includes/head-custom-google-analytics.html` in your Jekyll site.
+[languages]
+  [languages.en]
+    title = "Hello Friend NG"
+    keywords = ""
+    copyright = '<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
+    readOtherPosts = "Read other posts"
 
-### Overriding GitHub-generated URLs
+  [languages.en.params]
+    subtitle  = "A simple theme for Hugo"
 
-Templates often rely on URLs supplied by GitHub such as links to your repository or links to download your project. If you'd like to override one or more default URLs:
+    [languages.en.params.logo]
+      logoText = "hello friend ng"
+      logoHomeLink = "/"
+    # or
+    #
+    # path = "/img/your-example-logo.svg"
+    # alt = "Your example logo alt text"
 
-1. Look at [the template source](https://github.com/pages-themes/hacker/blob/master/_layouts/default.html) to determine the name of the variable. It will be in the form of `{{ site.github.zip_url }}`.
-2. Specify the URL that you'd like the template to use in your site's `_config.yml`. For example, if the variable was `site.github.url`, you'd add the following:
-    ```yml
-    github:
-      zip_url: http://example.com/download.zip
-      another_url: another value
-    ```
-3. When your site is built, Jekyll will use the URL you specified, rather than the default one provided by GitHub.
+  # And you can even create generic menu
+  [[menu.main]]
+    identifier = "blog"
+    name       = "Blog"
+    url        = "/posts"
+```
 
-*Note: You must remove the `site.` prefix, and each variable name (after the `github.`) should be indent with two space below `github:`.*
+## More things
 
-For more information, see [the Jekyll variables documentation](https://jekyllrb.com/docs/variables/).
+### Built-in shortcodes
 
-## Roadmap
+Of course you are able to use all default shortcodes from hugo (https://gohugo.io/content-management/shortcodes/).
 
-See the [open issues](https://github.com/pages-themes/hacker/issues) for a list of proposed features (and known issues).
+#### image
 
-## Project philosophy
+Properties:
 
-The Hacker theme is intended to make it quick and easy for GitHub Pages users to create their first (or 100th) website. The theme should meet the vast majority of users' needs out of the box, erring on the side of simplicity rather than flexibility, and provide users the opportunity to opt-in to additional complexity if they have specific needs or wish to further customize their experience (such as adding custom CSS or modifying the default layout). It should also look great, but that goes without saying.
+  - `src` (required)
+  - `alt` (optional)
+  - `position` (optional, default: `left`, options: [`left`, `center`, `right`])
+  - `style`
 
-## Contributing
+Example:
 
-Interested in contributing to Hacker? We'd love your help. Hacker is an open source project, built one contribution at a time by users like you. See [the CONTRIBUTING file](docs/CONTRIBUTING.md) for instructions on how to contribute.
+``` golang
+{{< image src="/img/hello.png" alt="Hello Friend" position="center" style="border-radius: 8px;" >}}
+```
 
-### Previewing the theme locally
+### Code highlighting
 
-If you'd like to preview the theme locally (for example, in the process of proposing a change):
+By default the theme is using PrismJS to color your code syntax. All you need to do is to wrap you code like this:
 
-1. Clone down the theme's repository (`git clone https://github.com/pages-themes/hacker`)
-2. `cd` into the theme's directory
-3. Run `script/bootstrap` to install the necessary dependencies
-4. Run `bundle exec jekyll serve` to start the preview server
-5. Visit [`localhost:4000`](http://localhost:4000) in your browser to preview the theme
+<pre>
+``` html
+  // your code here
+```
+</pre>
 
-### Running tests
+### Favicon
 
-The theme contains a minimal test suite, to ensure a site with the theme would build successfully. To run the tests, simply run `script/cibuild`. You'll need to run `script/bootstrap` once before the test script will work.
+Check the [docs](docs/favicons.md).
+
+### Audio Support
+
+You wrote an article and recorded it? Or do you have a special music that you would like to put on a certain article? Then you can do this now without further ado.
+
+In your article add to your front matters part:
+
+```yaml
+audio: path/to/file.mp3
+```
+
+## Social Icons:
+
+A large variety of social icons are available and can be configured like this:
+
+```toml
+[[params.social]]
+  name = "<site>"
+  url = "<profile_URL>"
+```
+
+Take a look into this [list](docs/svgs.md) of available icon options. 
+
+If you need another one, just open an issue or create a pull request with your wished icon. :)
+
+## Known issues
+
+There is a bug in Hugo that sometimes causes the main page not to render correctly. The reason is an empty taxonomy part.
+Related issue tickets: [!14](https://github.com/rhazdon/hugo-theme-hello-friend-ng/issues/14) [!59](https://github.com/rhazdon/hugo-theme-hello-friend-ng/issues/59).
+
+Either you comment it out completely or you write the following in
+
+``` toml
+[taxonomies]
+  tag      = "tags"
+  category = "categories"
+```
+
+## How to edit the theme
+
+Just edit it. You don't need any node stuff. ;)
+
+## Sponsoring
+
+If you like my work and if you think this project is worth to support it, just <br />
+<a href="https://www.buymeacoffee.com/djordjeatlialp" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-green.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
+
+## Licence
+
+Copyright © 2019-2021 Djordje Atlialp
+
+The theme is released under the MIT License. Check the [original theme license](https://github.com/rhazdon/hugo-theme-hello-friend-ng/blob/master/LICENSE.md) for additional licensing information.
