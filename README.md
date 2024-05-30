@@ -1,2 +1,2 @@
-# S1ckB0y1337.github.io
-Personal Blog
+# jekyll-theme-console demo
+This is a demo site for the jekyll-theme-console theme.
